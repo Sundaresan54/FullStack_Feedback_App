@@ -3,10 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-// const passport = require ('passport');
-// const googleStrategy = require ('passport-google-oauth20').Strategy;
-// const keys = require ('./config/keys');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
