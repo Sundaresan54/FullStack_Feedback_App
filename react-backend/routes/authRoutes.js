@@ -5,7 +5,12 @@ module.exports = (router) => {
         scope: ['profile', 'email']
     })
     );
-    router.get('/auth/google/callback', passport.authenticate('google'));
+    router.get('/auth/google/callback', passport.authenticate('google'),
+    (req,res)=>{
+        console.log(res,"cameeeeee")
+        res.redirect('/surveys')
+    }
+);
     router.get('/api/current_user', (req, res)=> {
         console.log(req.user,"gtdrtder");
         res.send(req.user);

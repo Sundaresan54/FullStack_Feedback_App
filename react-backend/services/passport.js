@@ -23,11 +23,11 @@ passport.use(new googleStrategy({
     clientID:keys.googleClientID,
     clientSecret:keys.googleClientSecret,
     callbackURL:'/auth/google/callback'
-}, async(accessToken,refreshToken, profile, done)=> {
+}, async (accessToken,refreshToken, profile, done)=> {
     console.log(profile.id, " google uniqueId ");
-    User.findOne({
+   const existingUser = await User.findOne({
         googleId:profile.id
-    }).then(existingUser =>{
+    })
         if(existingUser){
             //Existing User
             console.log("already present")
@@ -35,14 +35,10 @@ passport.use(new googleStrategy({
         }
         else{
             //new User
-            new User ({
-                googleId:profile.id
-            }).save()
-            .then( user =>{
-                done(null,user)
-            });
+            const user= await new User ({googleId:profile.id}).save();
+            done(null,user)
+           
         }
-    })
     
 }
 )
