@@ -18,8 +18,12 @@ passport.deserializeUser((id, done)=>{
         console.log(user,"deserialzed");
     done(null,user);
     }).catch(err=>console.log(err,"in deserial"));
+    
 });
+console.log('All keys:', keys);
+console.log('Google key:', keys.googleClientID);
 passport.use(new googleStrategy({
+    
     clientID:keys.googleClientID,
     clientSecret:keys.googleClientSecret,
     callbackURL:'/auth/google/callback'

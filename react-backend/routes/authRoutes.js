@@ -7,7 +7,6 @@ module.exports = (router) => {
     );
     router.get('/auth/google/callback', passport.authenticate('google'),
     (req,res)=>{
-        console.log(res,"cameeeeee")
         res.redirect('/surveys')
     }
 );
@@ -15,9 +14,10 @@ module.exports = (router) => {
         console.log(req.user,"gtdrtder");
         res.send(req.user);
       });
-      router.get('/logout', (req, res)=> {
+      router.get('/api/logout', (req, res)=> {
         console.log(req.user,"gtdrtder");
         req.logout();
-        res.send(req.user);
+        
+        res.redirect('/');
       });
 };
