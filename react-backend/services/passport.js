@@ -5,23 +5,8 @@ const keys = require ('../config/keys');
 const User = mongoose.model('users');
 
 
-//Getting UserID from google
-passport.serializeUser((user, done)=>{
-    console.log(user.id,"serialzed");
-    done(null,user.id);
-});
 
-//converting userID into User
-passport.deserializeUser((id, done)=>{
-    console.log(id,"deserialzed");
-    User.findById(id).then( user =>{
-        console.log(user,"deserialzed");
-    done(null,user);
-    }).catch(err=>console.log(err,"in deserial"));
-    
-});
-console.log('All keys:', keys);
-console.log('Google key:', keys.googleClientID);
+
 passport.use(new googleStrategy({
     
     clientID:keys.googleClientID,
@@ -47,3 +32,24 @@ passport.use(new googleStrategy({
 }
 )
 );
+
+
+//Getting UserID from google
+passport.serializeUser((user, done)=>{
+    console.log(user.id,"serialzed");
+    done(null,user.id);
+});
+
+//converting userID into User
+passport.deserializeUser((id, done)=>{
+    console.log(id,"deserialzed");
+    User.findById(id).then( user =>{
+        console.log(user,"deserialzed");
+    done(null,user);
+    }).catch(err=>console.log(err,"in deserial"));
+    
+});
+console.log('All keys:', keys);
+console.log('Google key:', keys.googleClientID);
+
+
