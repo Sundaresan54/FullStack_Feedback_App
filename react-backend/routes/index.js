@@ -20,6 +20,20 @@ router.use(passport.initialize());
 router.use(passport.session());
 billingRoutes(router)
 authRoutes(router);
+
+//production side 
+if(process.env.NODE_ENV==='production'){
+  //express will serve up production assets
+  //like main.js file or main.css file
+  app.use(express.static('build'));
+
+  //express will serve up index.html file
+  // if it is not recognize route
+  const path = require ('path');
+  router.get('*',(req,res)=>{
+    res.sendFile(path.resolve(__dirname,'build','index.html'));
+  }) 
+}
 mongoose.connect(keys.mongoURI).then (
   ()=>{
     console.log("connected to mongoDB")},
