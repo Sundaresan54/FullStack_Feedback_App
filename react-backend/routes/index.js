@@ -1,11 +1,13 @@
 var express = require('express');
 var router = express.Router();
 require('../models/User');
+require('../models/Survey');
 require('../services/passport');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const authRoutes = require('./authRoutes');
 const billingRoutes = require('./billingRoutes');
+const surveyRoutes = require('./surveyRoutes');
 const keys = require('../config/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
@@ -20,6 +22,7 @@ router.use(passport.initialize());
 router.use(passport.session());
 billingRoutes(router)
 authRoutes(router);
+surveyRoutes(router);
 
 //production side 
 if(process.env.NODE_ENV==='production'){
